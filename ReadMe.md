@@ -130,7 +130,7 @@ MediaInfo::load('./1.mkv');
 print_r(MediaInfo::getCodec() == MediaInfo::getCodec('./2.mkv'));
 
 //The same thing without loading the Load function
-print_r(MediaInfo::getCodec('./1.mkv') == MediaInfo::getCodec('./2.mkv'));
+print_r(MediaInfo::getVideoCodec('./1.mkv') == MediaInfo::getVideoCodec('./2.mkv'));
 ```
 
 ### clone the repository and install the requirements
