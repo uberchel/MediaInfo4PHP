@@ -28,11 +28,9 @@
         require 'mediainfo.php';
 
         // Load and parse info
-        // MediaInfo::Load('./1.mkv', true);
+         MediaInfo::Load('./1.mkv', true);
         // print_r(MediaInfo::GetAudios());
         // exit;
-
-
 
         // get Title file
         echo "<div class=\"function\"><b>GetTitle():</b> ";
