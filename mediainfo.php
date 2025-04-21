@@ -227,7 +227,7 @@
                     $stream['type'] = 'audios';
 
                     // parsing audio streaming
-                    if (preg_match('/Audio: ([^,\s]+).*?(\d+\sHz),\s?(\d.\d|\d).*?(\d+ kb\/s)/', $stream['type_info'], $audio)) {
+                    if (preg_match('/Audio: ([^,\s]+),.*?(\d+\sHz),\s?([^,\s]+).*?(\d+ kb\/s)/', $stream['type_info'], $audio)) {
                         $stream['codec'] = $audio[1];
                         $stream['rates'] = $audio[2];
                         $stream['channels'] = $audio[3];
