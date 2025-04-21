@@ -46,6 +46,9 @@ For the rest, it is also possible to assign the path to the file to the first pa
 // Print the name, return string
  echo MediaInfo::GetTitle();
 
+// Output the Size file, return string
+ echo MediaInfo::GetSize();
+
 // Output the Duration, return string
  echo MediaInfo::GetDuration();
 
