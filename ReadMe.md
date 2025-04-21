@@ -97,7 +97,7 @@ if (MediaInfo::Has('size')) {
     echo MediaInfo::GetSize();
 }
 
-\
+
 Get data from video track size
 ```
 require './mediainfo.php';
@@ -107,7 +107,7 @@ if (MediaInfo::Has('video.size')) {
     echo MediaInfo::GetVideo()->size;
 }
 ```
-\
+
 Get data from audio tracks
 ```
 require './mediainfo.php';
@@ -118,7 +118,7 @@ foreach (MediaInfo::GetAudios() AS $audio) {
     echo "ID: {$audio['id']}, Title: {$audio['title']}, Codec: {$audio['codec']}";
 }
 ```
-\
+
 Comparing codecs of different files
 ```
 require './mediainfo.php';
