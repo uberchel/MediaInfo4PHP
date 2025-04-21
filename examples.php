@@ -30,51 +30,57 @@
         // Load and parse info
         MediaInfo::Load('./1.mkv', true);
 
+
+        if (MediaInfo::Has('video.size')) {
+            print_r(MediaInfo::GetAudios());
+        }
+        exit;
+
         // get Title file
         echo "<div class=\"function\"><b>GetTitle():</b> ";
-        echo (MediaInfo::GetTitle());
+        echo MediaInfo::GetTitle();
         echo "</div>";
 
         // get Duration
         echo "<div class=\"function\"><b>GetDuration():</b> ";
-        echo (MediaInfo::GetDuration());
+        echo MediaInfo::GetDuration();
         echo "</div>";
 
         // get VideoCodec
         echo "<div class=\"function\"><b>GetVideoCodec():</b> ";
-        echo (MediaInfo::GetVideoCodec());
+        echo MediaInfo::GetVideoCodec();
         echo "</div>";
 
         // get AudioCodec
         echo "<div class=\"function\"><b>GetAudioCodec():</b> ";
-        echo (MediaInfo::GetAudioCodec());
+        echo MediaInfo::GetAudioCodec();
         echo "</div>";
 
         // get Start time
         echo "<div class=\"function\"><b>GetStart():</b> ";
-        echo (MediaInfo::GetStart());
+        echo MediaInfo::GetStart();
         echo "</div>";
 
         // get Bitrate
         echo "<div class=\"function\"><b>GetBitrate():</b> ";
-        echo (MediaInfo::GetBitrate());
+        echo MediaInfo::GetBitrate();
         echo "</div>";
 
         // get Encoder
         echo "<div class=\"function\"><b>GetEncoder():</b> ";
-        echo (MediaInfo::GetEncoder());
+        echo MediaInfo::GetEncoder();
         echo "</div>";
 
         // get Created file
         echo "<div class=\"function\"><b>GetCreated():</b> ";
-        echo (MediaInfo::GetCreated());
+        echo MediaInfo::GetCreated();
         echo "</div>";
 
-        // get Videos
-        echo "<div class=\"functions\"><b>GetVideos():</b><br>";
+        // get Video
+        echo "<div class=\"functions\"><b>GetVideo():</b><br>";
         ?>
         <textarea>
-            <?php print_r (MediaInfo::GetVideos()); ?>
+            <?php print_r (MediaInfo::GetVideo()); ?>
         </textarea>
         <?php
         echo "</div>";

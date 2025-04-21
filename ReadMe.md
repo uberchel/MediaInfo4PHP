@@ -32,11 +32,16 @@ For the rest, it is also possible to assign the path to the file to the first pa
 // Setting the Array type for subsequent calls
  MediaInfo::asObject(false);
  
- // Setting the Object type for subsequent calls
+// Setting the Object type for subsequent calls
  MediaInfo::asObject();
 
- // The following calls will return True / False
+// The following calls will return True / False
  MediaInfo::isObject();
+
+// Checking for the existence of a method value return True / False
+// $value - method, example: size or streams audios.size | video.size
+// $index - array index in streams, optional parameter
+ MediaInfo::Has($value, $index);
 
 // Print the name, return string
  echo MediaInfo::GetTitle();
@@ -48,10 +53,10 @@ For the rest, it is also possible to assign the path to the file to the first pa
  echo MediaInfo::GetStart();
 
 // Output the Video Codec, return string
-echo MediaInfo::GetVideoCodec();
+ echo MediaInfo::GetVideoCodec();
 
 // Output the Audio Codec, return string
-echo MediaInfo::GetAudioCodec();
+ echo MediaInfo::GetAudioCodec();
 
 // Output the video bitrate, return string
  echo MediaInfo::GetBitrate();
@@ -62,8 +67,8 @@ echo MediaInfo::GetAudioCodec();
 // Print the creation date, return string
  echo MediaInfo::GetCreated();
 
-// Output a stream of Videos, return Object or Array
- print_r(MediaInfo::GetVideos());
+// Output a stream of Video, return Object or Array
+ print_r(MediaInfo::GetVideo());
 
 // Output an Audio stream, return Object or Array
  print_r(MediaInfo::GetAudios());
@@ -83,14 +88,25 @@ echo MediaInfo::GetAudioCodec();
 
 ## Examples
 \
-Get data from video tracks
+Get data from video track size
 ```
 require './mediainfo.php';
 
 MediaInfo::load('./1.mkv');
 
-foreach (MediaInfo::GetVideos() AS $video) {
-    echo "ID: {$video['id']}, Title: {$video['title']}, Codec: {$video['codec']}";
+if (MediaInfo::Has('video.size')) {
+    echo MediaInfo::GetVideo->size;
+}
+```
+\
+Get data from audio tracks
+```
+require './mediainfo.php';
+
+MediaInfo::load('./1.mkv');
+
+foreach (MediaInfo::GetAudios() AS $audio) {
+    echo "ID: {$audio['id']}, Title: {$audio['title']}, Codec: {$audio['codec']}";
 }
 ```
 \
