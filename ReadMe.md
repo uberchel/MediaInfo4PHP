@@ -88,14 +88,23 @@ For the rest, it is also possible to assign the path to the file to the first pa
 
 ## Examples
 \
+Get data from video file size
+```
+require './mediainfo.php';
+
+MediaInfo::load('./1.mkv');
+if (MediaInfo::Has('size')) {
+    echo MediaInfo::GetSize();
+}
+
+\
 Get data from video track size
 ```
 require './mediainfo.php';
 
 MediaInfo::load('./1.mkv');
-
 if (MediaInfo::Has('video.size')) {
-    echo MediaInfo::GetVideo->size;
+    echo MediaInfo::GetVideo()->size;
 }
 ```
 \
