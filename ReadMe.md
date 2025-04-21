@@ -96,7 +96,7 @@ MediaInfo::load('./1.mkv');
 if (MediaInfo::Has('size')) {
     echo MediaInfo::GetSize();
 }
-
+```
 
 Get data from video track size
 ```
