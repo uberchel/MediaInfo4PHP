@@ -29,12 +29,15 @@
 
         // Load and parse info
          MediaInfo::Load('./1.mkv', true);
-        // print_r(MediaInfo::GetAudios());
-        // exit;
 
         // get Title file
         echo "<div class=\"function\"><b>GetTitle():</b> ";
         echo MediaInfo::GetTitle();
+        echo "</div>";
+
+        // get Title file
+        echo "<div class=\"function\"><b>GetSize():</b> ";
+        echo MediaInfo::GetSize();
         echo "</div>";
 
         // get Duration

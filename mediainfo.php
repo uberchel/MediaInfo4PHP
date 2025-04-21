@@ -7,7 +7,7 @@
  * the FFMpeg program must be installed on the sevrera or computer for the class to work.
  * --
  * Author: UberCHEL
- * version: v1.0.3
+ * version: v1.0.4
  */
 
  class MediaInfo {
@@ -288,6 +288,9 @@
                     self::$result['streams'][$type][] = $stream;
                 }
                 
+                // FileSize
+                self::$result['size'] = self::FormatSize(fileSize($file));
+
                 // remove variable
                 unset($type);
             }
