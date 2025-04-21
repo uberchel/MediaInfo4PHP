@@ -28,9 +28,9 @@
         require 'mediainfo.php';
 
         // Load and parse info
-        MediaInfo::Load('./1.mkv', true);
-        print_r(MediaInfo::GetAudios());
-        exit;
+        // MediaInfo::Load('./1.mkv', true);
+        // print_r(MediaInfo::GetAudios());
+        // exit;
 
 
 
