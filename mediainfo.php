@@ -308,9 +308,6 @@
      */
     private static function FFMpegExec (string $file) {
 
-        // auto destruction class
-        register_shutdown_function(['MediaInfo', 'destruct']);
-
         // check for exec
         if (self::exec_disabled()) {
             throw new RuntimeException('Exec is disabled on server', 334561);

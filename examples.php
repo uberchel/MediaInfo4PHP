@@ -19,6 +19,8 @@
         <h2>MediaInfo functions:</h2>
         <?php
 
+        use uberchel\MediaInfo;
+
         /**
          * Test php class MediaInfo
          */
