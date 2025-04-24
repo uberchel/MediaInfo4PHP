@@ -7,26 +7,50 @@ MediaInfo is an easy-to-use static PHP class, for extracting data from audio and
 - ffmpeg
 
 ## Installation
-No complicated installation, just transfer or clone the class file to your project.
+No complicated installation, just transfer or clone the class file to your project or composer
+
+```
+composer require uberchel/mediainfo4php
+```
 
 ## Using
 The main methods **Load** and **Get** have 2 parameters, the first is the path to the file, the second is to give as an Object (default = true)
 For the rest, it is also possible to assign the path to the file to the first parameters if you need to find out only something specific separately or compare 2 files..
 
 \
+**Using composer.**
+```
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+$data = MediaInfo::Get('1.mkv', true);
+print_r($data);
+
+```
+
+\
 **We get all the metadata from the file and put it in the $data variable.**
 ```
+<?php
+
  $data = MediaInfo::Get('1.mkv', true);
  print_r($data);
+
 ```
 \
 **Getting all the metadata from the file**
 ```
+<?php
+
  MediaInfo::Load('1.mkv', true);
+
 ```
 \
 **Output the necessary data**
 ```
+<?php
+
 // By default, the MediaInfo4PHP class returns an Object anyway, this method supports a Boolean attribute,
 // by default it is set to true, and this method can also return all metadata in the selected type.
 // Setting the Array type for subsequent calls
@@ -93,6 +117,8 @@ For the rest, it is also possible to assign the path to the file to the first pa
 \
 Get data from video file size
 ```
+<?php
+
 require './mediainfo.php';
 
 MediaInfo::load('./1.mkv');
@@ -103,6 +129,8 @@ if (MediaInfo::Has('size')) {
 
 Get data from video track size
 ```
+<?php
+
 require './mediainfo.php';
 
 MediaInfo::load('./1.mkv');
@@ -113,6 +141,8 @@ if (MediaInfo::Has('video.size')) {
 
 Get data from audio tracks
 ```
+<?php
+
 require './mediainfo.php';
 
 MediaInfo::load('./1.mkv');
@@ -120,10 +150,13 @@ MediaInfo::load('./1.mkv');
 foreach (MediaInfo::GetAudios() AS $audio) {
     echo "ID: {$audio['id']}, Title: {$audio['title']}, Codec: {$audio['codec']}";
 }
+
 ```
 
 Comparing codecs of different files
 ```
+<?php
+
 require './mediainfo.php';
 
 MediaInfo::load('./1.mkv');
@@ -131,6 +164,7 @@ print_r(MediaInfo::getVideoCodec() == MediaInfo::getVideoCodec('./2.mkv'));
 
 //The same thing without loading the Load function
 print_r(MediaInfo::getVideoCodec('./1.mkv') == MediaInfo::getVideoCodec('./2.mkv'));
+
 ```
 
 ### clone the repository and install the requirements
