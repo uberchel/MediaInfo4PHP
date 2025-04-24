@@ -7,7 +7,7 @@ MediaInfo is an easy-to-use static PHP class, for extracting data from audio and
 - ffmpeg
 
 ## Installation
-No complicated installation, just transfer or clone the class file to your project or composer
+No complicated installation, just transfer or copy the class file to your projector and install it using composer.
 
 ```
 composer require uberchel/mediainfo4php
@@ -119,7 +119,7 @@ print_r($data);
 Get data from video file size
 ```
 <?php
-
+use uberchel\MediaInfo;
 require './mediainfo.php';
 
 MediaInfo::load('./1.mkv');
@@ -131,7 +131,7 @@ if (MediaInfo::Has('size')) {
 Get data from video track size
 ```
 <?php
-
+use uberchel\MediaInfo;
 require './mediainfo.php';
 
 MediaInfo::load('./1.mkv');
@@ -143,7 +143,7 @@ if (MediaInfo::Has('video.size')) {
 Get data from audio tracks
 ```
 <?php
-
+use uberchel\MediaInfo;
 require './mediainfo.php';
 
 MediaInfo::load('./1.mkv');
@@ -157,7 +157,7 @@ foreach (MediaInfo::GetAudios() AS $audio) {
 Comparing codecs of different files
 ```
 <?php
-
+use uberchel\MediaInfo;
 require './mediainfo.php';
 
 MediaInfo::load('./1.mkv');
