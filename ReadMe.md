@@ -9,7 +9,7 @@ MediaInfo is an easy-to-use static PHP class, for extracting data from audio and
 ## Installation
 No complicated installation, just transfer or copy the class file to your projector and install it using composer.
 
-```
+```bash
 composer require uberchel/mediainfo4php
 ```
 
@@ -19,7 +19,7 @@ For the rest, it is also possible to assign the path to the file to the first pa
 
 \
 **Using composer.**
-```
+```php
 <?php
 
 use uberchel\MediaInfo;
@@ -32,7 +32,7 @@ print_r($data);
 
 \
 **We get all the metadata from the file and put it in the $data variable.**
-```
+```php
 <?php
 
  $data = MediaInfo::Get('1.mkv', true);
@@ -41,7 +41,7 @@ print_r($data);
 ```
 \
 **Getting all the metadata from the file**
-```
+```php
 <?php
 
  MediaInfo::Load('1.mkv', true);
@@ -49,7 +49,7 @@ print_r($data);
 ```
 \
 **Output the necessary data**
-```
+```php
 <?php
 
 // By default, the MediaInfo4PHP class returns an Object anyway, this method supports a Boolean attribute,
@@ -117,7 +117,7 @@ print_r($data);
 ## Examples
 \
 Get data from video file size
-```
+```php
 <?php
 use uberchel\MediaInfo;
 require './mediainfo.php';
@@ -129,7 +129,7 @@ if (MediaInfo::Has('size')) {
 ```
 
 Get data from video track size
-```
+```php
 <?php
 use uberchel\MediaInfo;
 require './mediainfo.php';
@@ -141,7 +141,7 @@ if (MediaInfo::Has('video.size')) {
 ```
 
 Get data from audio tracks
-```
+```php
 <?php
 use uberchel\MediaInfo;
 require './mediainfo.php';
@@ -155,7 +155,7 @@ foreach (MediaInfo::GetAudios() AS $audio) {
 ```
 
 Comparing codecs of different files
-```
+```php
 <?php
 use uberchel\MediaInfo;
 require './mediainfo.php';
@@ -169,7 +169,7 @@ print_r(MediaInfo::getVideoCodec('./1.mkv') == MediaInfo::getVideoCodec('./2.mkv
 ```
 
 ### clone the repository and install the requirements
-```
+```bash
 git clone https://github.com/uberchel/MediaInfo4PHP
 ```
 
