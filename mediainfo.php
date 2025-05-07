@@ -7,7 +7,7 @@
  * the FFMpeg program must be installed on the sevrera or computer for the class to work.
  * --
  * Author: UberCHEL
- * version: v1.0.5
+ * version: v1.0.6
  */
 
  namespace uberchel;
@@ -47,7 +47,7 @@
     /**
      * Check is Object
      * 
-     * @return Boolean
+     * @return boolean
      */
     public static function isObject() {
         return self::$state['isObject'];
@@ -56,7 +56,7 @@
     /**
      * A function for setting the data output as an object or not
      * 
-     * @property {boolean} $ok
+     * @property boolean $ok
      * @return void
      */
     public static function asObject(bool $ok = true) {
@@ -66,9 +66,9 @@
     /**
      * Static Function a the Get All info media file
      * 
-     * @property {string} $name
-     * @property {array} $arguments
-     * @return object or array
+     * @property string $name
+     * @property array $arguments
+     * @return mixed - object or array
      */
     public static function __callStatic(string $name, array $arguments = []) {
         // check arguments
@@ -101,8 +101,8 @@
     /**
      * Checking for the existence of a method value
      * 
-     * @property {string} $value
-     * @property {int} $num
+     * @property string $value
+     * @property int $num
      * @return boolean
      */
     public static function Has(string $value, int $num = null) {
@@ -139,9 +139,9 @@
     /**
      * Static Function a the Get All info media file
      * 
-     * @property {string} $file
-     * @property {boolean} $toObject
-     * @return Object or Array
+     * @property string $file
+     * @property boolean $toObject
+     * @return mixed - Object or Array
      */
     public static function Get(string $file = '', bool $toObject = true) {
         // check file on empty
@@ -159,8 +159,8 @@
     /**
      * Static Function a the Get All info media file
      * 
-     * @property {string} $file
-     * @property {boolean} $toObject
+     * @property string $file
+     * @property boolean $toObject
      * @return void
      */
     public static function Load (string $file = '', bool $toObject = true) {
@@ -174,7 +174,7 @@
         self::asObject($toObject);
 
         // parsing general info (Duration, bitrate, start time)
-        if (preg_match('/Duration:\s+?(\d+:\d+:\d+)[^\n,]+, start:\s+?(\d+)[^\n,]+, bitrate:\s+?([0-9.]+\sKb\/s)\b/iS', $source, $general)) {
+        if (preg_match('/Duration:\s+?(\d+:\d+:\d+)[^\n,]+, start:\s+?(\d+)[^\n,]+, bitrate:\s+?([0-9.]+\sKb\/s)\b/iS', $source,$general)) {
             self::$result['start'] = $general[2];
             self::$result['bitrate'] = $general[3];
             self::$result['duration'] = $general[1];
@@ -303,14 +303,14 @@
     /**
      * Static Function Executable ffmpeg
      * 
-     * @property {string} $file
-     * @return strings
+     * @property string $file
+     * @return string
      */
     private static function FFMpegExec (string $file) {
 
         // check for exec
         if (self::exec_disabled()) {
-            throw new RuntimeException('Exec is disabled on server', 334561);
+            throw new \RuntimeException('Exec is disabled on server', 334561);
         }
 
         // Exec ffmpeg proccess
@@ -321,14 +321,14 @@
             return implode(PHP_EOL, $result);
         } 
         else {
-            throw new RuntimeException('FFmpeg is not installed on host server', 334561);
+            throw new \RuntimeException('FFmpeg is not installed on host server', 334561);
         }
     }
 
     /**
      * check is Data on transform Object or String or array
      * 
-     * @property {mixed} $data
+     * @property mixed $data
      * @return mixed
      */
     private static function transformData ($data) {
@@ -359,7 +359,7 @@
     /**
      * bytes format for kylobytes/s
      * 
-     * @property {float} $size
+     * @property float $size
      * @return string
      */
     private static function FormatBytRate(float $size) {
@@ -372,7 +372,7 @@
     /**
      * bytes formatte for size
      * 
-     * @property {float} $size
+     * @property float $size
      * @return string
      */
     private static function FormatSize(float $size) {

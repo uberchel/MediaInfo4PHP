@@ -11,6 +11,11 @@
           "homepage": "https://github.com/uberchel/MediaInfo4PHP"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "uberchel\\mediainfo4php\\": ""
+        }
+    },
     "license": "MIT",
     "require": {
         "php": ">=7.2"

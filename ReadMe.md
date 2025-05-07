@@ -1,5 +1,5 @@
 # MediaInfo4PHP
-MediaInfo is an easy-to-use static PHP class, for extracting data from audio and video files, the FFMpeg program must be installed on the sevrera or computer for the class to work.
+MediaInfo is an easy-to-use static PHP class, for extracting data from audio and video files, the FFMpeg program must be installed on the server or computer for the class to work.
 
 ## Requirements
 - PHP >= 7.2
