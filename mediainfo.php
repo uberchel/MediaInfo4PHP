@@ -7,7 +7,7 @@
  * the FFMpeg program must be installed on the sevrera or computer for the class to work.
  * --
  * Author: UberCHEL
- * version: v1.0.6
+ * version: v1.0.7
  */
 
  namespace uberchel;

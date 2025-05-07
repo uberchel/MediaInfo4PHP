@@ -13,7 +13,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "uberchel\\mediainfo4php\\": ""
+            "uberchel\\": ""
         }
     },
     "license": "MIT",
