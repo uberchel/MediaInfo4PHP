@@ -23,7 +23,10 @@ For the rest, it is also possible to assign the path to the file to the first pa
 <?php
 
 use uberchel\MediaInfo;
+//use composer
 require __DIR__ . '/vendor/autoload.php';
+//not use composer
+require './mediainfo.php';
 
 $data = MediaInfo::Get('1.mkv', true);
 print_r($data);

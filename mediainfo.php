@@ -7,7 +7,7 @@
  * the FFMpeg program must be installed on the sevrera or computer for the class to work.
  * --
  * Author: UberCHEL
- * version: v1.0.7
+ * version: v1.0.8
  */
 
  namespace uberchel;
@@ -174,32 +174,36 @@
         self::asObject($toObject);
 
         // parsing general info (Duration, bitrate, start time)
-        if (preg_match('/Duration:\s+?(\d+:\d+:\d+)[^\n,]+, start:\s+?(\d+)[^\n,]+, bitrate:\s+?([0-9.]+\sKb\/s)\b/iS', $source,$general)) {
-            self::$result['start'] = $general[2];
+        if (preg_match('/Duration:\s+?(\d+:\d+:\d+\.\d+)[^\n,]+,(?: start:\s+?(\d+)[^\n,]+,)? bitrate:\s+?([0-9.]+\sKb\/s)\b/iS', $source, $general)) {
+            self::$result['start'] = $general[2]?: 0; // fix: null to 0;
             self::$result['bitrate'] = $general[3];
             self::$result['duration'] = $general[1];
         }
 
         // parsing general info (title, encoder, created file)
         self::$result['title'] = preg_match('/title\s+: ([^\n]+)\b/iS', $source, $var) ? $var[1] : null;
-        self::$result['encoder'] = preg_match('/encoder\s+: ([^\n]+)\b/iS', $source, $var) ? $var[1] : null;
-        self::$result['created'] = preg_match('/creation_time\s+: ([0-9-\:T]+)\b/i', $source, $var) ? $var[1] : '00:00:00';
+        self::$result['artist'] = preg_match('/artist\s+: ([^\n]+)\b/iS', $source, $var) ? $var[1] : null;
+        self::$result['created'] = preg_match('/(?:creation_time|DATE)\s+: ([0-9-\:T]+)\b/i', $source, $var) ? $var[1] : null;
+        self::$result['encoder'] = preg_match('/(?:encoder|Encoded\sby)\s+: ([^\n]+)\b/iS', $source, $var) ? $var[1] 
+        : (preg_match('/Audio: mp3/i', $source, $var) ? 'LAME Encoder' : null); // fix: parsing for audio files
+        unset($var);
 
         // parsing streams data
-        preg_match_all('/Stream #\d+:\d+(?:\([^\)]+\))?:[^\n]*(?:\n\s+.*?(?=\n\s*Stream #|\n\s*$|\Z))/s', $source, $streams);
-        unset($var);
+        if (!preg_match_all('/Stream #\d+:\d+(?:\([^\)]+\))?:[^\n]*(?:\n\s+.*?(?=\n?\s*Stream #|\n\s*$|\Z))/s', $source, $streams)) {
+            preg_match_all('/Stream #\d+:.*\n/is', $source, $streams); // fix to audio file (mp3|wav|wmv)
+        }
 
         // parsing of streams dat for cycle
         foreach ($streams[0] as $item) {
             $stream = [];
-
-            if (preg_match('/Stream #(\d+:\d+)(?:\(([^\)]+)\))?: ([^\n]+)/', $item, $main)) {
+            if (preg_match('/Stream #(\d+:\d+)(?:(?:.+)?\(([^\)]+)\))?: ([^\n]+)/', $item, $main)) { // fix: parse Stream
                 $stream['id'] = $main[1];
-                $stream['language'] = isset($main[2]) ? $main[2] : null;
+                $stream['language'] = $main[2] ?: null; // fix: short state
                 $stream['type_info'] = trim($main[3]);
 
                 // parse stream videos section
                 if (stripos($stream['type_info'], 'Video:') === 0) {
+                    
                     $stream['type'] = stripos($stream['type_info'], 'attached pic') ? 'pictures' : 'video';
                     if (preg_match('/Video: ([^,\s]+).*?,\s(\d+x\d+).*?([0-9.]+ fps)/', $stream['type_info'], $video)) {
                         $stream['codec'] = $video[1];
@@ -211,7 +215,7 @@
                         $stream['title'] = self::$result['title'];
 
                         // adding videoCodec of videos id 0
-                        if (empty(self::$result['audioCodec'])) {
+                        if (empty(self::$result['videoCodec'])) { //fix: replace value
                             self::$result['videoCodec'] = $video[1];
                         }
                     }
@@ -230,7 +234,7 @@
                     $stream['type'] = 'audios';
 
                     // parsing audio streaming
-                    if (preg_match('/Audio: ([^,\s]+),.*?(\d+\sHz),\s?([^,\s]+).*?(\d+ kb\/s)/', $stream['type_info'], $audio)) {
+                    if (preg_match('/Audio: ([^,]+),.*?(\d+\sHz),\s?([^,\s]+).*?(\d+ kb\/s)/', $stream['type_info'], $audio)) { // fix parse audio
                         $stream['codec'] = $audio[1];
                         $stream['rates'] = $audio[2];
                         $stream['channels'] = $audio[3];
@@ -288,7 +292,7 @@
                 }
                 // Adding the rest of the streams as an array
                 else {
-                    self::$result['streams'][$type][] = $stream;
+                    self::$result['streams'][$type][] = $stream; // fix for audio
                 }
                 
                 // FileSize
@@ -315,7 +319,7 @@
 
         // Exec ffmpeg proccess
         exec ("ffmpeg -i {$file} 2>&1", $result);
-
+        
         // check is success of output data
         if (strpos($result[0], 'ffmpeg') === 0) {
             return implode(PHP_EOL, $result);
